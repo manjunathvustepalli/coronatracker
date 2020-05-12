@@ -1,32 +1,100 @@
-<div id="title"><center>Corona Tracker</center></div>
-<div class="row m-2 ">
-  <div class="col-3">
-    <div class="card text-center border-warning" style="width: 18rem;">
-      <!-- <img src="..." class="card-img-top" alt="..."> -->
+<div id="title" style="text-align: center;">Corona Tracker</div>
+<div id="container"> 
+<div class="row mx-5 p-3">
+  <div class="col-lg-4 col-md-4 col-sm-2 p-2">
+    <div class="card text-center border-warning" >
+     
       <div class="card-body">
         <h5 class="card-title text-warning">Confirmed</h5>
         <p class="card-text  text-warning">{{this.numberOfConfirmedCases}}</p>
       </div>
     </div></div>
-    <div class="col-3">
-    <div class="card text-center border-success" style="width: 18rem;">
-      <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="col-lg-4 col-md-4 col-sm-2 p-2">
+    <div class="card text-center border-success" >
+      
       <div class="card-body">
         <h5 class="card-title text-success">recovered</h5>
         <p class="card-text  text-success">{{this.numberOfRecoveredCases}}</p>
       </div>
     </div></div>
-    <div class="col-3">
-    <div class="card text-center border-danger" style="width: 18rem;">
-      <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="col-lg-4 col-md-3 col-sm-2 p-2">
+    <div class="card text-center border-danger" >
+      
       <div class="card-body">
         <h5 class="card-title text-danger">deaths</h5>
         <p class="card-text  text-danger">{{this.numberOfDeathCases}}</p>
       </div>
-    </div></div>
-    </div>
-    <div class="chart-container" style="position: relative; height:40vh; width:100vw">
-    <canvas id="myChart"></canvas></div>
+    </div></div></div> </div>
+    <div class="row ">
+   
+    <div class=" col-lg-4 col-md-3 col-sm-2 p-3 mx-lg-auto mx-md-auto mx-sm-auto" >
+      <p class="text-center"> select your country</p>
+       <div class="input-group">
   
+  <select class="custom-select" id="inputGroupSelect01"    (change)="selectChange($event.target.value)" >
+    <option selected>Choose...</option>
+  
+   
+      <option *ngFor="let country of country" value="{{country}}">{{ country }}</option>
+    
+  </select>
+</div>
+    </div></div>
+
+  
+ <!-- <div *ngIf="countryselected" >
+  <div id="container"> 
+<div class="row mx-5 p-3">
+  <div class="col-lg-4 col-md-4 col-sm-2 p-2">
+    <div class="card text-center border-warning" >
+     
+      <div class="card-body">
+        <h5 class="card-title text-warning">Confirmed</h5>
+        <p class="card-text  text-warning">{{numberOfConfirmedCasescountry}}</p>
+      </div>
+    </div></div>
+    <div class="col-lg-4 col-md-4 col-sm-2 p-2">
+    <div class="card text-center border-success" >
+      
+      <div class="card-body">
+        <h5 class="card-title text-success">recovered</h5>
+        <p class="card-text  text-success">{{numberOfRecoveredCasescountry}}</p>
+      </div>
+    </div></div>
+    <div class="col-lg-4 col-md-3 col-sm-2 p-2">
+    <div class="card text-center border-danger" >
+      
+      <div class="card-body">
+        <h5 class="card-title text-danger">deaths</h5>
+        <p class="card-text  text-danger">{{numberOfDeathCasescountry}}</p>
+      </div>
+    </div></div></div> </div></div> -->
+    
+<div *ngIf="countrydatafetched">
+<canvas
+      baseChart
+      [chartType]="'pie'"
+      [datasets]="chartData1"
+     [labels]="chartLabels1"
+      [options]="chartOptions1"
+      [legend]="true"
+      (chartClick)="onChartClick($event)">
+  </canvas>
+</div>
 
 
+    
+   <!-- <div>
+    <canvas id="canvas" >{{myChart}}</canvas></div>
+     -->
+     <div *ngIf="!countryselected" >
+  <canvas
+      baseChart
+      [chartType]="'line'"
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [legend]="true"
+      (chartClick)="onChartClick($event)">
+  </canvas>
+</div>
